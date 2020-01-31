@@ -25,10 +25,10 @@ if (myargs.length > 1) {
 let dataFile = '';
 if (myargs.length > 2) {
     dataFile = path.resolve(myargs[2]);
-} else {
+}/* else {
     //default path for data file
-    dataFile = path.resolve(__dirname, 'data', 'La_County_Housing_Data.csv');
-}
+    dataFile = path.resolve(__dirname, 'data', 'Assessor_Parcels_Data_-_2018.csv');
+}*/
 
 //open read stream and setup processing for each row
 fs.createReadStream(dataFile)
@@ -38,7 +38,7 @@ fs.createReadStream(dataFile)
         handleRowData(row).then( (row) => {
             return next(null, row);
         }).catch( (error) => {
-            console.log(error);
+            console.error(error);
         });
     })
     .pipe(process.stdout)
@@ -59,7 +59,7 @@ async function handleRowData(row) {
         if (prices.length == 3) {
             row = {
                 ...row,
-                AutoAddress: prices[0],
+                PropertySharkAddress: prices[0],
                 SaleDate: prices[1],
                 SalePrice: prices[2]
             };
@@ -71,6 +71,7 @@ async function handleRowData(row) {
 
 function handleEnd()
 {
+   console.error("done!");   
    process.exit();
 }
 
