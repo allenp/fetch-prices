@@ -64,7 +64,9 @@ async function handleRowData(row) {
                 SalePrice: prices[2]
             };
         }
-    } catch (e) {}
+    } catch (e) {
+      console.error(e);
+    }
 
     return row;
 }
@@ -130,6 +132,3 @@ async function getPropertyInfo(address) {
 
     return info;
 }
-
-
-
